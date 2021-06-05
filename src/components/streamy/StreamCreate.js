@@ -8,10 +8,15 @@ import Box from '@material-ui/core/Box';
 import TextField from '@material-ui/core/TextField';
 
 class StreamCreate extends Component {
-	renderInput({ input, label }) {
+	renderInput({ input, label, meta }) {
+		const isError = meta.touched && meta.error ? true : false;
+
 		return (
 			<Box my={3}>
-				<InputLabel style={{ marginBottom: '6px', fontWeight: 800 }}>
+				<InputLabel
+					error={isError}
+					style={{ marginBottom: '6px', fontWeight: 800 }}
+				>
 					{label}
 				</InputLabel>
 
@@ -21,6 +26,8 @@ class StreamCreate extends Component {
 					multiline
 					rowsMax={3}
 					variant="outlined"
+					helperText={isError && meta.error}
+					error={isError}
 				/>
 			</Box>
 		);
@@ -56,6 +63,18 @@ class StreamCreate extends Component {
 	}
 }
 
+const validate = (formProps) => {
+	const errors = {};
+
+	if (!formProps.title) {
+		errors.title = 'You must enter title';
+	}
+	if (!formProps.description) {
+		errors.description = 'You must enter description';
+	}
+	return errors;
+};
 export default reduxForm({
-	form: 'streamCreate'
+	form: 'streamCreate',
+	validate
 })(StreamCreate);
