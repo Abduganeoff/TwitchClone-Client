@@ -12,7 +12,7 @@ function App() {
 		<div>
 			<BrowserRouter>
 				<Header />
-				<div style={{ marginTop: '70px' }}>
+				<div style={{ marginTop: '90px' }}>
 					<Route path="/" exact component={StreamList} />
 					<Route path="/streams/new" exact component={StreamCreate} />
 					<Route path="/streams/edit" exact component={StreamEdit} />
