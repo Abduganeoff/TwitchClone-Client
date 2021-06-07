@@ -39,7 +39,7 @@ class StreamList extends Component {
 	render() {
 		return (
 			<List>
-				<Typography variant="h5" style={{ margin: ' 0 0 5px 15px' }}>
+				<Typography variant="h5" gutterBottom>
 					Streams
 				</Typography>
 				{this.props.streams.length ? <Divider /> : null}
