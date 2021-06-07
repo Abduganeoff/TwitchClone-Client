@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStreams } from '../../actions';
+import { Link } from 'react-router-dom';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -18,7 +20,10 @@ class StreamList extends Component {
 	}
 
 	renderAdminAccess(stream) {
-		if (stream.userId === this.props.currentUserId) {
+		if (
+			stream.userId === this.props.currentUserId &&
+			this.props.isSignedIn
+		) {
 			return (
 				<ListItemSecondaryAction>
 					<Button
@@ -58,6 +63,26 @@ class StreamList extends Component {
 		});
 	}
 
+	renderCreateStreamButton() {
+		if (this.props.isSignedIn) {
+			return (
+				<ListItem style={{ marginTop: '30px' }}>
+					<ListItemSecondaryAction>
+						<Button
+							to="/streams/new"
+							component={Link}
+							style={{ textAlign: 'right' }}
+							variant="contained"
+							color="primary"
+						>
+							Create Stream
+						</Button>
+					</ListItemSecondaryAction>
+				</ListItem>
+			);
+		}
+	}
+
 	render() {
 		return (
 			<List>
@@ -66,6 +91,7 @@ class StreamList extends Component {
 				</Typography>
 				{this.props.streams.length ? <Divider /> : null}
 				{this.renderList()}
+				{this.renderCreateStreamButton()}
 			</List>
 		);
 	}
@@ -74,7 +100,8 @@ class StreamList extends Component {
 const mapStateToProps = (state) => {
 	return {
 		streams: Object.values(state.streams),
-		currentUserId: state.auth.userId
+		currentUserId: state.auth.userId,
+		isSignedIn: state.auth.isSignedIn
 	};
 };
 export default connect(mapStateToProps, { fetchStreams })(StreamList);
