@@ -16,7 +16,11 @@ function App() {
 				<div style={{ marginTop: '90px' }}>
 					<Route path="/" exact component={StreamList} />
 					<Route path="/streams/new" exact component={StreamCreate} />
-					<Route path="/streams/edit" exact component={StreamEdit} />
+					<Route
+						path="/streams/edit/:id"
+						exact
+						component={StreamEdit}
+					/>
 					<Route
 						path="/streams/delete"
 						exact
