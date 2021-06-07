@@ -22,32 +22,32 @@ export const signOut = () => {
 	};
 };
 
-export const createStrean = (formValues) => async (dispatch) => {
-	const response = await stream.post('/streams', formvalues);
+export const createStream = (formValues) => async (dispatch) => {
+	const response = await stream.post('/streams', formValues);
 
-	dispatch({ CREATE_STREAM, payload: response.data });
+	dispatch({ type: CREATE_STREAM, payload: response.data });
 };
 
 export const fetchStreams = () => async (dispatch) => {
 	const response = await stream.get('/stream');
 
-	dispatch({ FETCH_STREAMS, payload: response.data });
+	dispatch({ type: FETCH_STREAMS, payload: response.data });
 };
 
 export const fetchStream = (id) => async (dispatch) => {
 	const response = await stream.get(`/stream/${id}`);
 
-	dispatch({ FETCH_STREAM, payload: response.data });
+	dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
 export const editStream = (id, formValues) => async (dispatch) => {
 	const response = await stream.patch(`/stream/${id}`, formValues);
 
-	dispatch({ EDIT_STREAM, payload: response.data });
+	dispatch({ type: EDIT_STREAM, payload: response.data });
 };
 
 export const deleteStream = (id) => async (dispatch) => {
 	await stream.delete(`/stream/${id}`);
 
-	dispatch({ DELETE_STREM, payload: id });
+	dispatch({ type: DELETE_STREM, payload: id });
 };
