@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import GoogleAuth from './GoogleAuth';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -23,11 +24,27 @@ class Header extends Component {
 			<div>
 				<AppBar>
 					<Toolbar>
-						<Typography variant="h6">Streamy</Typography>
+						<Typography
+							to="/"
+							component={Link}
+							style={{ textDecoration: 'none' }}
+							color="inherit"
+							variant="h6"
+						>
+							Streamy
+						</Typography>
 						<ListItemSecondaryAction
 							className={classes.header_right}
 						>
-							<Typography variant="h6">All Streams</Typography>
+							<Typography
+								to="/"
+								component={Link}
+								style={{ textDecoration: 'none' }}
+								color="inherit"
+								variant="h6"
+							>
+								All Streams
+							</Typography>
 							<div className={classes.header_auth}>
 								<GoogleAuth />
 							</div>
