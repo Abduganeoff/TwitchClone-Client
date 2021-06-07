@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Input from '@material-ui/core/Input';
+import { connect } from 'react-redux';
+import { createStream } from '../../actions';
+
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
@@ -33,9 +35,9 @@ class StreamCreate extends Component {
 		);
 	}
 
-	onSubmit(formProps) {
-		console.log(formProps);
-	}
+	onSubmit = (formProps) => {
+		this.props.createStream(formProps);
+	};
 
 	render() {
 		return (
@@ -74,7 +76,10 @@ const validate = (formProps) => {
 	}
 	return errors;
 };
-export default reduxForm({
+
+const formStream = reduxForm({
 	form: 'streamCreate',
 	validate
 })(StreamCreate);
+
+export default connect(null, { createStream })(formStream);
