@@ -28,10 +28,12 @@ class StreamList extends Component {
 				<ListItemSecondaryAction>
 					<Button
 						style={{ marginRight: '4px' }}
+						to={`/streams/edit/${stream.id}`}
+						component={Link}
 						variant="contained"
 						color="primary"
 					>
-						Edit
+						Editc
 					</Button>
 					<Button variant="contained" color="secondary">
 						Delete
