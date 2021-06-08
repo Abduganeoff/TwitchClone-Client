@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { Component } from 'react';
+import StreamForm from './StreamForm';
+import { fetchStream, editStream } from '../../actions';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import Typography from '@material-ui/core/Typography';
 
-function StreamEdit() {
-	return <div>StreamEdit</div>;
+class StreamEdit extends Component {
+	componentDidMount() {
+		this.props.fetchStream(this.props.match.params.id);
+	}
+
+	onSubmit = (formProps) => {
+		this.props.editStream(this.props.match.params.id, formProps);
+	};
+	render() {
+		return (
+			<div>
+				<Typography variant="h5" gutterBottom>
+					Edit Stream
+				</Typography>
+				<StreamForm
+					initialValues={_.pick(
+						this.props.stream,
+						'title',
+						'description'
+					)}
+					onSubmit={this.onSubmit}
+				/>
+			</div>
+		);
+	}
 }
 
-export default StreamEdit;
+const mapStateToProps = (state, ownProps) => {
+	return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(mapStateToProps, { fetchStream, editStream })(
+	StreamEdit
+);
